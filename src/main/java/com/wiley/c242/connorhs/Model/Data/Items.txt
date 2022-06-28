@@ -1,4 +1,4 @@
-Twix::1.00::7
-Kit Kat::1.05::8
-Mars Bar::1.40::5
-Freddo::0.40::10
+A1::Twix::1.00::6
+B2::Freddo::0.40::10
+A2::Kit Kat::1.05::8
+B1::Mars Bar::1.40::5
