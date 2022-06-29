@@ -1,13 +1,11 @@
 package com.wiley.c242.connorhs.Controller;
 
-import com.wiley.c242.connorhs.Model.DTO.Change;
-import com.wiley.c242.connorhs.Model.DTO.DaoException;
-import com.wiley.c242.connorhs.Model.DTO.FileIOException;
-import com.wiley.c242.connorhs.Model.DTO.Item;
-import com.wiley.c242.connorhs.View.VendingMachineView;
+import com.wiley.c242.connorhs.DTO.Change;
+import com.wiley.c242.connorhs.DAO.DaoException;
+import com.wiley.c242.connorhs.DAO.FileIOException;
+import com.wiley.c242.connorhs.UI.VendingMachineView;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class VendingMachineController
 {

@@ -1,5 +1,6 @@
-package com.wiley.c242.connorhs.Model.DAO;
-import com.wiley.c242.connorhs.Model.DTO.*;
+package com.wiley.c242.connorhs.DAO;
+import com.wiley.c242.connorhs.DTO.Change;
+import com.wiley.c242.connorhs.DTO.Item;
 import java.math.BigDecimal;
 import java.util.List;
 

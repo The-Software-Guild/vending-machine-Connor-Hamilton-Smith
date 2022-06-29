@@ -1,5 +1,5 @@
-package com.wiley.c242.connorhs.Model.DAO;
-import com.wiley.c242.connorhs.Model.DTO.*;
+package com.wiley.c242.connorhs.DAO;
+import com.wiley.c242.connorhs.DTO.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -57,11 +57,12 @@ public class VendingMachineDAO implements DAO
         Item item = inventory.get(id);
         int currentQuantity = item.getQuantity();
 
-        if (item == null || currentQuantity <= 0)
-            throw new DaoException("Cannot remove item from inventory");
-        else {
+        if (item == null)
+            throw new DaoException("Item ID not recognised");
+        else if (currentQuantity <= 0)
+            throw new DaoException("Item unavailable");
+        else
             item.setQuantity(currentQuantity - 1);
-        }
     }
 
     public List<Item> getInventory()

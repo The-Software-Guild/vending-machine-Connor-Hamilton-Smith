@@ -1,4 +1,4 @@
-package com.wiley.c242.connorhs.Model.DTO;
+package com.wiley.c242.connorhs.DTO;
 import java.math.BigDecimal;
 
 public enum Change

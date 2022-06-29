@@ -1,4 +1,4 @@
-package com.wiley.c242.connorhs.Model.DTO;
+package com.wiley.c242.connorhs.DAO;
 
 public class FileIOException extends Exception
 {

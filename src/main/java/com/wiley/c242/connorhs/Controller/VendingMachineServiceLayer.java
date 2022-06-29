@@ -1,15 +1,14 @@
 package com.wiley.c242.connorhs.Controller;
 
-import com.wiley.c242.connorhs.Model.DAO.VendingMachineDAO;
-import com.wiley.c242.connorhs.Model.DTO.Change;
-import com.wiley.c242.connorhs.Model.DTO.DaoException;
-import com.wiley.c242.connorhs.Model.DTO.FileIOException;
-import com.wiley.c242.connorhs.Model.DTO.Item;
+import com.wiley.c242.connorhs.DAO.VendingMachineDAO;
+import com.wiley.c242.connorhs.DTO.Change;
+import com.wiley.c242.connorhs.DAO.DaoException;
+import com.wiley.c242.connorhs.DAO.FileIOException;
+import com.wiley.c242.connorhs.DTO.Item;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class VendingMachineServiceLayer
@@ -58,7 +57,7 @@ public class VendingMachineServiceLayer
         return true;
     }
 
-    public List<Item> getInventory()
+    public Collection<Item> getInventory()
     {
         return dao.getInventory();
     }

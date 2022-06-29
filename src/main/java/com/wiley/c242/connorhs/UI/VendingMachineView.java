@@ -1,10 +1,9 @@
-package com.wiley.c242.connorhs.View;
+package com.wiley.c242.connorhs.UI;
 
-import com.wiley.c242.connorhs.Model.DTO.Change;
-import com.wiley.c242.connorhs.Model.DTO.Item;
+import com.wiley.c242.connorhs.DTO.Item;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.List;
+import java.util.Collection;
 
 public class VendingMachineView
 {
@@ -20,7 +19,7 @@ public class VendingMachineView
         io.printMessage(message);
     }
 
-    public void displayItems(List<Item> items)
+    public void displayItems(Collection<Item> items)
     {
         printMessage("ID\t\tItem\t\tPrice\t\tQuantity in stock");
         printMessage("___________________________________________________________");

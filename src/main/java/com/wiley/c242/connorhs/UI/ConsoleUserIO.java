@@ -1,4 +1,4 @@
-package com.wiley.c242.connorhs.View;
+package com.wiley.c242.connorhs.UI;
 import java.util.Scanner;
 
 public class ConsoleUserIO implements UserIO

@@ -1,4 +1,4 @@
-package com.wiley.c242.connorhs.View;
+package com.wiley.c242.connorhs.UI;
 
 public interface UserIO
 {
