@@ -2,10 +2,8 @@ package com.wiley.c242.connorhs.DAO;
 import com.wiley.c242.connorhs.DTO.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class VendingMachineDAO implements DAO
 {
@@ -67,7 +65,9 @@ public class VendingMachineDAO implements DAO
 
     public List<Item> getInventory()
     {
-        return new ArrayList<>(inventory.values());
+        return inventory.values().stream()
+                .sorted(Comparator.comparing(Item::getId, (id1, id2) -> { return id1.compareTo(id2); }))
+                .collect(Collectors.toList());
     }
 
     public Item getItem(String id)

@@ -13,7 +13,6 @@ public class Application
     public static void main(String[] args)
     {
         String filePath = (args.length == 0) ? "src/main/java/com/wiley/c242/connorhs/Data/Items.txt" : args[0];
-        // TODO: Create audit log
         VendingMachineView view = new VendingMachineView(new ConsoleUserIO());
         try
         {

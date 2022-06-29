@@ -3,8 +3,10 @@ package com.wiley.c242.connorhs.Controller;
 import com.wiley.c242.connorhs.DTO.Change;
 import com.wiley.c242.connorhs.DAO.DaoException;
 import com.wiley.c242.connorhs.DAO.FileIOException;
+import com.wiley.c242.connorhs.DTO.Item;
 import com.wiley.c242.connorhs.UI.VendingMachineView;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
 
 public class VendingMachineController
@@ -54,7 +56,14 @@ public class VendingMachineController
 
     private void purchaseItem()
     {
-        // TODO: Use steams to list all items purchasable for the current balance
+        List<Item> purchasableItems = serviceLayer.getPurchasableInventory();
+        if (purchasableItems.size() > 0) {
+            view.printMessage("The following items can be purchased with £" + serviceLayer.getBalance());
+            view.displayItems(purchasableItems);
+        }
+        else
+            view.printMessage("There are no items that can be purchased for the current balance.");
+
         String id = view.getPurchaseID();
         boolean purchaseSuccessful = false;
         try {

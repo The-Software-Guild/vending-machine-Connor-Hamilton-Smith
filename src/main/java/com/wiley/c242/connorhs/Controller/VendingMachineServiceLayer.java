@@ -7,9 +7,8 @@ import com.wiley.c242.connorhs.DAO.FileIOException;
 import com.wiley.c242.connorhs.DTO.Item;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class VendingMachineServiceLayer
 {
@@ -55,6 +54,19 @@ public class VendingMachineServiceLayer
         dao.removeItem(id);
 
         return true;
+    }
+
+    public List<Item> getPurchasableInventory()
+    {
+        double availableBalance = dao.getBalance().doubleValue();
+        List <Item> inventory = dao.getInventory();
+
+        // Collect a new list of items filtered by available balance > price & quantity > 0, then sort by price (ascending)
+        return inventory.stream()
+                .filter((item) -> item.getPrice().doubleValue() <= availableBalance)
+                .filter((item) -> item.getQuantity() > 0)
+                .sorted(Comparator.comparing(Item::getPrice, (id1, id2) -> { return id1.compareTo(id2); }))
+                .collect(Collectors.toList());
     }
 
     public Collection<Item> getInventory()

@@ -1,5 +1,5 @@
 A1::Twix::1.00::5
 B2::Freddo::0.40::10
-A2::Kit Kat::1.05::8
-B1::Mars Bar::1.40::5
+A2::Kit Kat::1.05::7
 C1::Wine Gums::1.20::0
+B1::Mars Bar::1.40::5
