@@ -1,5 +1,7 @@
 package com.wiley.c242.connorhs.DAO;
 
+import com.wiley.c242.connorhs.DTO.FileIOException;
+
 import java.io.*;
 import java.util.*;
 
@@ -40,8 +42,11 @@ public class FileStorageIO implements StorageIO
     {
         // Create a print writer for writing to file
         PrintWriter output;
-        try { output = new PrintWriter(new FileWriter(path)); }
-        catch (IOException e) { throw new FileIOException(false); }
+        try {
+            output = new PrintWriter(new FileWriter(path));
+        } catch (IOException e) {
+            throw new FileIOException(false);
+        }
 
         for (String data : dataList)
         {
@@ -51,5 +56,16 @@ public class FileStorageIO implements StorageIO
         }
         // Close output stream
         output.close();
+    }
+
+    @Override
+    public void append(String data)
+    {
+        PrintWriter output;
+        try {
+            output = new PrintWriter(new FileWriter(path, true));
+            output.println(data);
+            output.flush();
+        } catch (IOException e) {  }
     }
 }

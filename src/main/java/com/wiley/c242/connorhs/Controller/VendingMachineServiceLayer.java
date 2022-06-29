@@ -1,9 +1,10 @@
 package com.wiley.c242.connorhs.Controller;
 
+import com.wiley.c242.connorhs.DAO.AuditDAO;
 import com.wiley.c242.connorhs.DAO.VendingMachineDAO;
 import com.wiley.c242.connorhs.DTO.Change;
-import com.wiley.c242.connorhs.DAO.DaoException;
-import com.wiley.c242.connorhs.DAO.FileIOException;
+import com.wiley.c242.connorhs.DTO.DaoException;
+import com.wiley.c242.connorhs.DTO.FileIOException;
 import com.wiley.c242.connorhs.DTO.Item;
 
 import java.math.BigDecimal;
@@ -12,31 +13,34 @@ import java.util.stream.Collectors;
 
 public class VendingMachineServiceLayer
 {
-    private VendingMachineDAO dao;
+    private VendingMachineDAO inventoryDao;
+    private AuditDAO auditDao;
 
-    public VendingMachineServiceLayer(VendingMachineDAO dao)
+    public VendingMachineServiceLayer(VendingMachineDAO dao, AuditDAO auditDao)
     {
-        this.dao = dao;
+        this.inventoryDao = dao;
+        this.auditDao = auditDao;
     }
 
     public void addBalance(BigDecimal value)
     {
-        dao.addFunds(value);
+        inventoryDao.addFunds(value);
     }
 
     public String getBalance()
     {
-        return dao.getBalance().toString();
+        return inventoryDao.getBalance().toString();
     }
 
     public List<Change> returnChange()
     {
         List<Change> change = new ArrayList<>();
 
+        // Get a list of coins for each type of change 5p, 10p etc..
         Change[] changeTypes = Change.values();
         for (Change type : changeTypes)
         {
-            change.addAll(dao.getChange(type));
+            change.addAll(inventoryDao.getChange(type));
         }
 
         return change;
@@ -44,22 +48,23 @@ public class VendingMachineServiceLayer
 
     public boolean purchaseItem(String id) throws DaoException
     {
-        Item item = dao.getItem(id);
+        Item item = inventoryDao.getItem(id);
 
         if (item == null) {
             return false;
         }
 
-        dao.removeFunds(item.getPrice());
-        dao.removeItem(id);
+        inventoryDao.removeFunds(item.getPrice());
+        inventoryDao.removeItem(id);
 
+        auditDao.log("PURCHASE::" + item.toDataString());
         return true;
     }
 
     public List<Item> getPurchasableInventory()
     {
-        double availableBalance = dao.getBalance().doubleValue();
-        List <Item> inventory = dao.getInventory();
+        double availableBalance = inventoryDao.getBalance().doubleValue();
+        List <Item> inventory = inventoryDao.getInventory();
 
         // Collect a new list of items filtered by available balance > price & quantity > 0, then sort by price (ascending)
         return inventory.stream()
@@ -71,16 +76,17 @@ public class VendingMachineServiceLayer
 
     public Collection<Item> getInventory()
     {
-        return dao.getInventory();
+        return inventoryDao.getInventory();
     }
 
     public Item getItem(String id)
     {
-        return dao.getItem(id);
+        return inventoryDao.getItem(id);
     }
 
     public void saveInventory() throws FileIOException
     {
-        dao.saveInventory();
+        inventoryDao.saveInventory();
+        auditDao.log("SAVING INVENTORY");
     }
 }

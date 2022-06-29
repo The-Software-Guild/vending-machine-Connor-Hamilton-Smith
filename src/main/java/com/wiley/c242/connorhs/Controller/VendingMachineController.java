@@ -1,12 +1,11 @@
 package com.wiley.c242.connorhs.Controller;
 
 import com.wiley.c242.connorhs.DTO.Change;
-import com.wiley.c242.connorhs.DAO.DaoException;
-import com.wiley.c242.connorhs.DAO.FileIOException;
+import com.wiley.c242.connorhs.DTO.DaoException;
+import com.wiley.c242.connorhs.DTO.FileIOException;
 import com.wiley.c242.connorhs.DTO.Item;
 import com.wiley.c242.connorhs.UI.VendingMachineView;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.List;
 
 public class VendingMachineController
@@ -99,6 +98,7 @@ public class VendingMachineController
         if (allChange.size() <= 0)
             return;
 
+        // Count and display the number of coins of each type in the list of allChange
         view.printMessage("You receive the following change...");
         Change[] changeTypes = Change.values();
         for (Change type : changeTypes)
